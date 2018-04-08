@@ -13,6 +13,10 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from rest_framework.permissions import IsAuthenticated
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
 import logging
 
 def index(request):
@@ -30,12 +34,22 @@ def myReservation(request):
     context = {'reservation_list': reservation_list}
     return render(request, 'reservation/myReservation.html', context)
 
-class ReservationList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    queryset = Reservation.objects.all()
-    serializer_class = ReservationSerializer
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+class ReservationList(APIView):
+ """
+ List all users, or create a new user.
+ """
+ permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+ def get(self, request, format=None):
+     reservations = Reservation.objects.all()
+     serializer = ReservationSerializer(reservations, many=True)
+     return Response(serializer.data)
+
+ def post(self, request, format=None):
+     serializer = ReservationSerializer(data=request.data)
+     if serializer.is_valid():
+         serializer.save(owner=self.request.user)
+         return HttpResponseRedirect('/')
+     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ReservationDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
