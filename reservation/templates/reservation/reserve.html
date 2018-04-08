@@ -1,0 +1,23 @@
+{% extends 'reservation/layout.html' %}
+
+{% block content %}
+  <div class='container'>
+    <h4>Reserve a resource</h4>
+    <form method="post" action="/reservations/">
+      {% csrf_token %}
+      {{ form }}
+      <button type="submit" class="btn btn-default">Reserve</button>
+    </form>
+  </div>
+
+
+  {% load static %}
+  <link rel='stylesheet' href="{% static "/bootstrap-datetimepicker.min.css" %}" />
+  <script src="{% static "/bootstrap-datetimepicker.min.js" %}"></script>
+
+  <script type="text/javascript">
+    $("#id_startTime").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+    $("#id_endTime").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+  </script>
+
+{% endblock %}

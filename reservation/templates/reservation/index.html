@@ -1,0 +1,24 @@
+{% extends 'reservation/layout.html' %}
+
+{% block content %}
+
+  <div class="container">
+  	{% if room_list %}
+  			<h4>Available ressources </h4>
+  	    <ul>
+  	    {% for room in room_list %}
+  	        <li><p>{{ room.name }}</p></li>
+  	    {% endfor %}
+  	    </ul>
+  	{% else %}
+  	    <p>No rooms are available.</p>
+  	{% endif %}
+
+  	<div id='calendar'></div>
+  </div>
+
+
+  {% load static %}
+  <script src="{% static "/calendarHandle.js" %}"></script>
+
+{% endblock %}
