@@ -9,6 +9,9 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js'></script>
 
+{% load static %}
+  <script src="{% static "/websocket.js" %}"></script>
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -18,7 +21,7 @@
       {% if user.is_authenticated %}
         <li><a href="/reserve">Reserve a ressource</a></li>
         <li><a href="/myreservation">My reservations</a></li>
-        <li><a> {{ user.username }} </a></li>
+        <li><a id="username" username="{{ user.username }}">{{ user.username }}</a></li>
         <li><a class="btn" href="/api-auth/logout/?next=/">SIGN OUT</a></li>
 	    {% else %}
         <li><a class="btn" href="{% url 'social:begin' 'google-oauth2' %}">SIGN IN</a></li>

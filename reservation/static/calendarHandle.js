@@ -2,7 +2,7 @@
 * This function collect all the existing reservations and put it in the calendar
 *
 */
-function getEventsFromDb () {
+function initializeCalendar () {
   var events = [];
   $.ajax({
     url: '/reservations',
@@ -24,4 +24,4 @@ function getEventsFromDb () {
   })
 }
 
-getEventsFromDb();
+initializeCalendar();

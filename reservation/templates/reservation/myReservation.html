@@ -10,7 +10,7 @@
   	        <li>
               <p>{{ reservation.reason }}</p>
               <p>Start : {{ reservation.startTime }}</p>
-              <p>End : {{ reservation.startTime }}</p>
+              <p>End : {{ reservation.endTime }}</p>
               <p>Room : {{ reservation.room }}</p>
               <button class="btn btn-danger" idResa="{{ reservation.id }}" >Delete</button>
             </li>
@@ -20,37 +20,8 @@
 
 
         <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-
-        <script>
-
-          // We handle the csrf token to use AJAX
-          var csrftoken = Cookies.get('csrftoken');
-          function csrfSafeMethod(method) {
-            // these HTTP methods do not require CSRF protection
-            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-          }
-          $.ajaxSetup({
-            beforeSend: function(xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                }
-            }
-          });
-
-          // We send the DELETE request with AJAX
-          $('.btn').on('click', function () {
-            $.ajax({
-                type: 'DELETE',
-                url: '/reservations/' + $(this).attr('idResa') + '/',
-                success: function() {
-                  window.location.replace("/myreservation");
-                },
-                error: function (err) {
-                  console.log("Error: ",err);
-                }
-            })
-          })
-        </script>
+        {% load static %}
+        <script src="{% static "/control_myReservation.js" %}"></script>
 
   	{% else %}
   	    <p>You don't have any reservation yet</p>

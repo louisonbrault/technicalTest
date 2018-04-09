@@ -36,7 +36,7 @@ def myReservation(request):
 
 class ReservationList(APIView):
  """
- List all users, or create a new user.
+ List all reservations, or create a new one.
  """
  permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
  def get(self, request, format=None):
@@ -48,7 +48,7 @@ class ReservationList(APIView):
      serializer = ReservationSerializer(data=request.data)
      if serializer.is_valid():
          serializer.save(owner=self.request.user)
-         return HttpResponseRedirect('/')
+         return Response(serializer.data, status=status.HTTP_201_CREATED)
      return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ReservationDetail(generics.RetrieveUpdateDestroyAPIView):
