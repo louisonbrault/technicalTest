@@ -7,7 +7,9 @@ class SimpleWebSocket(tornado.websocket.WebSocketHandler):
 
     def open(self):
         self.connections.add(self)
-
+    '''
+    When the server receive a message, it is send to every client
+    '''
     def on_message(self, message):
         [client.write_message(message) for client in self.connections]
 

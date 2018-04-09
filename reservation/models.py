@@ -1,7 +1,8 @@
 from django.db import models
-from pygments.formatters.html import HtmlFormatter
-from pygments import highlight
 
+'''
+A room is only defined by its name
+'''
 class Room(models.Model):
     name = models.CharField(max_length=200)
     def __str__(self):

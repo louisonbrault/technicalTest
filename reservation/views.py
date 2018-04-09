@@ -19,16 +19,26 @@ from rest_framework import status
 
 import logging
 
+
+'''
+Home page, render the ressourse list and the calendar
+'''
 def index(request):
-    room_list = Room.objects.order_by('-name')[:5]
+    room_list = Room.objects.order_by('-name')
     context = {'room_list': room_list}
     return render(request, 'reservation/index.html', context)
 
+'''
+Page where the user make a reservation
+'''
 def reserve(request):
     form = ReservationForm()
     context = { 'form':form, }
     return render(request, 'reservation/reserve.html', context)
 
+'''
+Page where the user can see his reservations²
+'''
 def myReservation(request):
     reservation_list = Reservation.objects.filter(owner=request.user)
     context = {'reservation_list': reservation_list}
@@ -36,7 +46,8 @@ def myReservation(request):
 
 class ReservationList(APIView):
  """
- List all reservations, or create a new one.
+ GET : List all reservations
+ POST: Create a new one
  """
  permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
  def get(self, request, format=None):
@@ -52,6 +63,9 @@ class ReservationList(APIView):
      return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ReservationDetail(generics.RetrieveUpdateDestroyAPIView):
+ """
+ REST API for one reservation, we use it for DELETE 
+ """
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                       IsOwnerOrReadOnly,)
     queryset = Reservation.objects.all()
