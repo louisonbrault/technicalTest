@@ -63,9 +63,9 @@ class ReservationList(APIView):
      return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ReservationDetail(generics.RetrieveUpdateDestroyAPIView):
- """
- REST API for one reservation, we use it for DELETE 
- """
+    """
+    REST API for one reservation, we use it for DELETE
+    """
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                       IsOwnerOrReadOnly,)
     queryset = Reservation.objects.all()

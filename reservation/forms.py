@@ -8,9 +8,9 @@ class ReservationForm(ModelForm):
          model = Reservation
          fields = ('room', 'startTime', 'endTime','reason')
 
-    '''
-    We add the select input for the room 
-    '''
+     '''
+     We add the select input for the room
+     '''
      def __init__(self, *args, **kwargs):
          super(ReservationForm, self).__init__(*args, **kwargs)
          self.queryset = forms.ModelChoiceField(queryset=Room)
