@@ -3,9 +3,10 @@ version: '3'
 services:
   web:
     build: .
-    command:
-      - python src/manage.py runserver 0.0.0.0:8000
-      - python src/webSocket/server.py
+    command: >
+      bash -c "python3 src/manage.py runserver 0.0.0.0:8000
+      && python3 src/webSocket/server.py"
+
     volumes:
       - .:/code
     ports:
