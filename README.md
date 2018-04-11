@@ -8,6 +8,8 @@ Go to /technicalTest with a shell
 
 $ pip install -r requirements.txt
 
+$ cd src
+
 $ python manage.py migrate
 
 $ python manage.py createsuperuser
@@ -23,7 +25,7 @@ Click on Rooms and create at least one Room
 
 Log out
 
-In an other shell go to /technicalTest/websocket
+In an other shell go to /technicalTest/src/websocket
 
 $ python server.py
 
