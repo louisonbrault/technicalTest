@@ -26,6 +26,15 @@
 	    {% else %}
         <li><a class="btn" href="{% url 'social:begin' 'google-oauth2' %}">SIGN IN</a></li>
 	    {% endif %}
+        <li><a id="utcOffset"></a></li>
+        <script>
+          function initializeUtcOffset () {
+            var now = new Date();
+            var n = now.getTimezoneOffset()/60;
+            return n;
+          }
+          $('#utcOffset').append("UTC"+initializeUtcOffset());
+        </script>
 
     </ul>
   </div>
