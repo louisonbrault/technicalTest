@@ -5,9 +5,11 @@ This project is developped by Louison BRAULT
 Before runing the app please follow those steps :
 
 Go on top of the directory 
+
 $ docker build -t mainapp .
 
 Then go to /webSocket
+
 $ docker build -t websocket .
 
 Go back on top 
