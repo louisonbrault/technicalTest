@@ -22,9 +22,12 @@ $ docker run -d -p 8888:8888 websocket
 Run the mainapp in the same mode 
 $ docker run -d -p 8000:80 mainapp
 
-To stop the containers 
+To stop the containers
+
 $ docker container ls
+
 $ docker container stop IDWEBSOCKET
+
 $ docker container stop MAINAPP
 
 In your browser, go to http://localhost:8000
