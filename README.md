@@ -19,9 +19,11 @@ Verify that you have the images
 $ docker image ls
 
 Run the webSocket in the background, in detached mode
+
 $ docker run -d -p 8888:8888 websocket
 
 Run the mainapp in the same mode 
+
 $ docker run -d -p 8000:80 mainapp
 
 To stop the containers
