@@ -4,30 +4,28 @@ This project is developped by Louison BRAULT
 
 Before runing the app please follow those steps :
 
-Go to /technicalTest with a shell
+Go on top of the directory 
+$ docker build -t mainapp .
 
-$ pip install -r requirements.txt
+Then go to /webSocket
+$ docker build -t websocket .
 
-$ cd src
+Go back on top 
+$ cd ..
 
-$ python manage.py migrate
+Verify that you have the images 
+$ docker image ls
 
-$ python manage.py createsuperuser
+Run the webSocket in the background, in detached mode
+$ docker run -d -p 8888:8888 websocket
 
-And follow the instructions
+Run the mainapp in the same mode 
+$ docker run -d -p 8000:80 mainapp
 
-$ python manage.py runserver
-
-Then in your browser http://localhost:8000/admin
-Login with the account created just before
-
-Click on Rooms and create at least one Room
-
-Log out
-
-In an other shell go to /technicalTest/src/websocket
-
-$ python server.py
+To stop the containers 
+$ docker container ls
+$ docker container stop IDWEBSOCKET
+$ docker container stop MAINAPP
 
 In your browser, go to http://localhost:8000
 
